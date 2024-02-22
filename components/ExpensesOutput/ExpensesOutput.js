@@ -1,9 +1,12 @@
 import ExpensesSummary from "./ExpensesSummary";
 import ExpensesList from "./ExpensesList";
-function ExpensesOutput({ expenses }) {
+function ExpensesOutput({ expenses, expensesPeriodName }) {
   return (
     <View>
-      <ExpensesSummary />
+      <ExpensesSummary
+        expenses={expenses}
+        expensesPeriodName={expensesPeriodName}
+      />
       <ExpensesList />
     </View>
   );
