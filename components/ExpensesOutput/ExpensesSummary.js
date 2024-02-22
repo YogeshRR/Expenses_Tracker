@@ -6,7 +6,7 @@ function ExpensesSummary({ expensesPeriodName, expenses }) {
   return (
     <View>
       <Text>{expensesPeriodName}</Text>
-      <Text>${summaryExpenses}</Text>
+      <Text>${summaryExpenses.ToFixed(2)}</Text>
     </View>
   );
 }
