@@ -3,6 +3,7 @@ import { useLayoutEffect } from "react";
 
 import IconButton from "../components/UI/IconButton";
 import { GlobalStyles } from "../constants/styles";
+import CustomButton from "../components/UI/CustomButton";
 function ManageExpense({ route, navigation }) {
   const expenseId = route.params?.expenseId;
   const isEdit = !!expenseId;
@@ -12,8 +13,21 @@ function ManageExpense({ route, navigation }) {
     });
   }, [navigation, isEdit]);
   function deleteExpensesHandler() {}
+  function cancelEventHandler() {}
   return (
     <View style={styles.container}>
+      <View style={styles.buttonStyle}>
+        <CustomButton
+          buttonStyle={styles.buttons}
+          mode="flat"
+          onPress={cancelEventHandler}
+        >
+          Cancel
+        </CustomButton>
+        <CustomButton buttonStyle={styles.buttons} onPress={cancelEventHandler}>
+          {isEdit ? "Update" : "Add"}
+        </CustomButton>
+      </View>
       {isEdit && (
         <View style={styles.deleteContainer}>
           <IconButton
@@ -41,5 +55,14 @@ const styles = StyleSheet.create({
     backgroundColor: GlobalStyles.colors.primary800,
     flex: 1,
     padding: 24,
+  },
+  buttonStyle: {
+    flexDirection: "row",
+
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttons: {
+    minWidth: 120,
   },
 });
