@@ -11,7 +11,7 @@ const Tab = createBottomTabNavigator();
 function TabSetup() {
   return (
     <Tab.Navigator
-      screenOptions={{
+      screenOptions={({ navigation }) => ({
         headerStyle: { backgroundColor: GlobalStyles.colors.primary500 },
         headerTintColor: "white",
         tabBarStyle: { backgroundColor: GlobalStyles.colors.primary500 },
@@ -22,11 +22,11 @@ function TabSetup() {
             size={24}
             color={tintColor}
             onPress={() => {
-              console.log("pressed in Tab");
+              navigation.navigate("ManageExpenses");
             }}
           />
         ),
-      }}
+      })}
     >
       <Tab.Screen
         name="AllExpenses"
