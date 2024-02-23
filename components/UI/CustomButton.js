@@ -46,5 +46,7 @@ const moreStyles = StyleSheet.create({
   pressed: {
     opacity: 0.75,
     borderRadius: 4,
+    margin: 4,
+    backgroundColor: GlobalStyles.colors.primary100,
   },
 });

@@ -12,8 +12,15 @@ function ManageExpense({ route, navigation }) {
       title: isEdit ? "Manage Expense" : "Add Expense",
     });
   }, [navigation, isEdit]);
-  function deleteExpensesHandler() {}
-  function cancelEventHandler() {}
+  function deleteExpensesHandler() {
+    navigation.goBack();
+  }
+  function cancelEventHandler() {
+    navigation.goBack();
+  }
+  function submitEventHandler() {
+    navigation.goBack();
+  }
   return (
     <View style={styles.container}>
       <View style={styles.buttonStyle}>
@@ -24,7 +31,7 @@ function ManageExpense({ route, navigation }) {
         >
           Cancel
         </CustomButton>
-        <CustomButton buttonStyle={styles.buttons} onPress={cancelEventHandler}>
+        <CustomButton buttonStyle={styles.buttons} onPress={submitEventHandler}>
           {isEdit ? "Update" : "Add"}
         </CustomButton>
       </View>
