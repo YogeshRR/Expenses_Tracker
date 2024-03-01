@@ -12,8 +12,21 @@ function ManageExpenses() {
           onTextChange: amountChangeHandler,
         }}
       />
-      <Input label="Date" />
-      <Input label="Description" />
+      <Input
+        label="Date"
+        textConfigue={{
+          placeHolder: "YYYY-MM-DD",
+          maxLength: 10,
+          onTextChange: () => {},
+        }}
+      />
+      <Input
+        label="Description"
+        textConfigue={{
+          autoCorrect: false,
+          autoCaption: true,
+        }}
+      />
     </View>
   );
 }
