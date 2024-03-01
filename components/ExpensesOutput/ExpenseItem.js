@@ -20,9 +20,7 @@ function ExpenseItem({ id, description, amount, date }) {
           <Text style={[styles.textItem, styles.description]}>
             {description}
           </Text>
-          <Text style={styles.dateStyle}>
-            {date.toISOString().slice(0, 10)}
-          </Text>
+          <Text style={styles.dateStyle}></Text>
         </View>
         <View style={styles.amountContainer}>
           <Text style={styles.textItem}>{amount}</Text>
