@@ -1,10 +1,12 @@
 import { View, StyleSheet } from "react-native";
 import { useContext, useLayoutEffect } from "react";
-
-import IconButton from "../components/UI/IconButton";
 import { GlobalStyles } from "../constants/styles";
-import CustomButton from "../components/UI/CustomButton";
 import { ExpensesContext } from "../store/expenses-context";
+
+import CustomButton from "../components/UI/CustomButton";
+import ManageExpenses from "../components/ManageExpense/ManageExpenses";
+import IconButton from "../components/UI/IconButton";
+
 function ManageExpense({ route, navigation }) {
   const expensesCtx = useContext(ExpensesContext);
   const expenseId = route.params?.expenseId;
@@ -39,6 +41,7 @@ function ManageExpense({ route, navigation }) {
   }
   return (
     <View style={styles.container}>
+      <ManageExpenses />
       <View style={styles.buttonStyle}>
         <CustomButton
           buttonStyle={styles.buttons}
