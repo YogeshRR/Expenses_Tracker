@@ -4,7 +4,7 @@ import { GlobalStyles } from "../constants/styles";
 import { ExpensesContext } from "../store/expenses-context";
 
 import CustomButton from "../components/UI/CustomButton";
-import ManageExpenses from "../components/ManageExpense/ManageExpenses";
+import InputForms from "../components/ManageExpense/InputForm";
 import IconButton from "../components/UI/IconButton";
 
 function ManageExpense({ route, navigation }) {
@@ -41,7 +41,7 @@ function ManageExpense({ route, navigation }) {
   }
   return (
     <View style={styles.container}>
-      <ManageExpenses />
+      <InputForms />
       <View style={styles.buttonStyle}>
         <CustomButton
           buttonStyle={styles.buttons}
