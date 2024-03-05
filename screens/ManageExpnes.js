@@ -3,7 +3,6 @@ import { useContext, useLayoutEffect } from "react";
 import { GlobalStyles } from "../constants/styles";
 import { ExpensesContext } from "../store/expenses-context";
 
-import CustomButton from "../components/UI/CustomButton";
 import InputForms from "../components/ManageExpense/InputForm";
 import IconButton from "../components/UI/IconButton";
 
@@ -23,37 +22,22 @@ function ManageExpense({ route, navigation }) {
   function cancelEventHandler() {
     navigation.goBack();
   }
-  function submitEventHandler() {
+  function submitEventHandler(expenseData) {
     if (isEdit) {
-      expensesCtx.updateExpenses(expenseId, {
-        description: "Bring new Shoes",
-        amount: 50,
-        date: new Date("2024-12-26"),
-      });
+      expensesCtx.updateExpenses(expenseId, expenseData);
     } else {
-      expensesCtx.addExpenses({
-        description: "Bring new Shoes!!!!",
-        amount: 50,
-        date: new Date("2024-12-26"),
-      });
+      expensesCtx.addExpenses(expenseData);
     }
     navigation.goBack();
   }
   return (
     <View style={styles.container}>
-      <InputForms />
-      <View style={styles.buttonStyle}>
-        <CustomButton
-          buttonStyle={styles.buttons}
-          mode="flat"
-          onPress={cancelEventHandler}
-        >
-          Cancel
-        </CustomButton>
-        <CustomButton buttonStyle={styles.buttons} onPress={submitEventHandler}>
-          {isEdit ? "Update" : "Add"}
-        </CustomButton>
-      </View>
+      <InputForms
+        titleLabel={isEdit ? "Update" : "Add"}
+        onSubmit={submitEventHandler}
+        onCancel={cancelEventHandler}
+      />
+
       {isEdit && (
         <View style={styles.deleteContainer}>
           <IconButton
@@ -81,14 +65,5 @@ const styles = StyleSheet.create({
     backgroundColor: GlobalStyles.colors.primary800,
     flex: 1,
     padding: 24,
-  },
-  buttonStyle: {
-    flexDirection: "row",
-
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  buttons: {
-    minWidth: 120,
   },
 });

@@ -74,7 +74,7 @@ function expenseReduce(state, action) {
   switch (action.type) {
     case "ADD":
       const id = new Date().toString() + Math.random().toString();
-      return [{ ...action.payload, id: id }, ...state, DUMMY_EXPENSES];
+      return [{ ...action.payload, id: id }, ...state];
       break;
     case "DELETE":
       return state.filter((expense) => expense.id !== action.payload);

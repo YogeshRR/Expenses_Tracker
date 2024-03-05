@@ -2,6 +2,8 @@ import { Pressable, View, Text, StyleSheet } from "react-native";
 import { GlobalStyles } from "../../constants/styles";
 import { useNavigation } from "@react-navigation/native";
 
+import dayjs from "dayjs";
+
 function ExpenseItem({ id, description, amount, date }) {
   const navigation = useNavigation();
   function expensePressHandler() {
@@ -20,7 +22,9 @@ function ExpenseItem({ id, description, amount, date }) {
           <Text style={[styles.textItem, styles.description]}>
             {description}
           </Text>
-          <Text style={styles.dateStyle}></Text>
+          <Text style={styles.dateStyle}>
+            {dayjs(date).format("YYYY - MM - DD")}
+          </Text>
         </View>
         <View style={styles.amountContainer}>
           <Text style={styles.textItem}>{amount}</Text>

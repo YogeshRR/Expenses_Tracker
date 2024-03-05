@@ -2,13 +2,16 @@ import { View, StyleSheet, Text } from "react-native";
 import { useState } from "react";
 
 import Input from "./Input";
+import CustomButton from "../UI/CustomButton";
 
-function InputForms() {
+function InputForms({ onCancel, titleLabel, onSubmit }) {
   const [inputValue, setInputValue] = useState({
     amount: "",
     date: "",
     description: "",
+    id: "",
   });
+
   function inputValueChangeHandler(inputIdentifier, enteredText) {
     setInputValue((curInputValue) => {
       return {
@@ -16,6 +19,15 @@ function InputForms() {
         [inputIdentifier]: enteredText,
       };
     });
+  }
+  function submitEventHandler() {
+    const expenseData = {
+      amount: +inputValue.amount,
+      date: new Date(inputValue.date),
+      description: inputValue.description,
+    };
+
+    onSubmit(expenseData);
   }
   return (
     <View style={styles.forms}>
@@ -36,8 +48,8 @@ function InputForms() {
           textInputConfig={{
             placeholder: "YYYY-MM-DD",
             maxLength: 10,
-            onChangeText: inputValueChangeHandler.bind(this, "date"),
-            value: inputValue.date,
+            // onChangeText: inputValueChangeHandler.bind(this, "date"),
+            // value: inputValue.date,
           }}
         />
       </View>
@@ -49,6 +61,18 @@ function InputForms() {
           value: inputValue.description,
         }}
       />
+      <View style={styles.buttonStyle}>
+        <CustomButton
+          buttonStyle={styles.buttons}
+          mode="flat"
+          onPress={onCancel}
+        >
+          Cancel
+        </CustomButton>
+        <CustomButton buttonStyle={styles.buttons} onPress={submitEventHandler}>
+          {titleLabel}
+        </CustomButton>
+      </View>
     </View>
   );
 }
@@ -71,5 +95,14 @@ const styles = StyleSheet.create({
     marginVertical: 24,
     textAlign: "center",
     fontWeight: "bold",
+  },
+  buttonStyle: {
+    flexDirection: "row",
+
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttons: {
+    minWidth: 120,
   },
 });

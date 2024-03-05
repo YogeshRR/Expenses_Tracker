@@ -26,8 +26,8 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 24,
     backgroundColor: GlobalStyles.colors.primary700,
-    },
-    textStyle: {
-        fontSize : 16,
-    }
+  },
+  textStyle: {
+    fontSize: 16,
+  },
 });

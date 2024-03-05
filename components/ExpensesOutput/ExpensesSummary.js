@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   periodText: {
-    fontSize: 12,
+    fontSize: 18,
     color: GlobalStyles.colors.primary400,
   },
   summaryText: {
