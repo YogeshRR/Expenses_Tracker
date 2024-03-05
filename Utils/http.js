@@ -6,7 +6,6 @@ export async function exportData(exportData) {
     exportData
   );
   const id = response.data.name;
-
   return id;
 }
 
@@ -25,4 +24,12 @@ export async function fetchData() {
     expenseData.push(expenseObj);
   }
   return expenseData;
+}
+
+export function updateData(id, expenseData) {
+  return axios.put(EXPENSES_URL + `/exportData/${id}.json`, expenseData);
+}
+
+export function deleteData(id) {
+  return axios.delete(EXPENSES_URL + `/exportData/${id}.json`);
 }

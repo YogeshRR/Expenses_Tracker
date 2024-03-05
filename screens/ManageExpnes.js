@@ -2,10 +2,10 @@ import { View, StyleSheet } from "react-native";
 import { useContext, useLayoutEffect } from "react";
 import { GlobalStyles } from "../constants/styles";
 import { ExpensesContext } from "../store/expenses-context";
+import { deleteData, exportData, updateData } from "../Utils/http";
 
 import InputForms from "../components/ManageExpense/InputForm";
 import IconButton from "../components/UI/IconButton";
-import { exportData, ExportData } from "../Utils/http";
 
 function ManageExpense({ route, navigation }) {
   const expensesCtx = useContext(ExpensesContext);
@@ -19,8 +19,10 @@ function ManageExpense({ route, navigation }) {
       title: isEdit ? "Manage Expense" : "Add Expense",
     });
   }, [navigation, isEdit]);
-  function deleteExpensesHandler() {
+  async function deleteExpensesHandler() {
+    await deleteData(expenseId);
     expensesCtx.deleteExpenses(expenseId);
+
     navigation.goBack();
   }
   function cancelEventHandler() {
@@ -28,6 +30,7 @@ function ManageExpense({ route, navigation }) {
   }
   async function submitEventHandler(expenseData) {
     if (isEdit) {
+      await updateData(expenseId, expenseData);
       expensesCtx.updateExpenses(expenseId, expenseData);
     } else {
       const id = await exportData(expenseData);
