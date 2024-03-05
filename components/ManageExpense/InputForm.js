@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import Input from "./Input";
 import CustomButton from "../UI/CustomButton";
+import { GlobalStyles } from "../../constants/styles";
 
 function InputForms({ onCancel, titleLabel, onSubmit, expenseItem }) {
   const [inputs, setInputs] = useState({
@@ -36,7 +37,7 @@ function InputForms({ onCancel, titleLabel, onSubmit, expenseItem }) {
     };
     const amountValidation =
       !isNaN(inputs.amount.value) && inputs.amount.value > 0;
-    const dateValidation = inputs.date.value.toString() !== "Invalid Date";
+    const dateValidation = inputs.date.value.toString() === "Invalid Date";
     const descriptionValidation = inputs.description.value.trim().length > 0;
     if (!amountValidation || !dateValidation || !descriptionValidation) {
       //Alert.alert("Error", "Please enter correct data", ["Okay"]);
@@ -64,6 +65,7 @@ function InputForms({ onCancel, titleLabel, onSubmit, expenseItem }) {
       <View style={styles.formsInputRow}>
         <Input
           label="Amount"
+          isInValid={!inputs.amount.isValid}
           style={styles.formsInput}
           textInputConfig={{
             keyboardType: "decimal-pad",
@@ -73,6 +75,7 @@ function InputForms({ onCancel, titleLabel, onSubmit, expenseItem }) {
         />
         <Input
           label="Date"
+          isInValid={!inputs.date.isValid}
           style={styles.formsInput}
           textInputConfig={{
             placeholder: "YYYY-MM-DD",
@@ -85,6 +88,7 @@ function InputForms({ onCancel, titleLabel, onSubmit, expenseItem }) {
 
       <Input
         label="Description"
+        isInValid={!inputs.description.isValid}
         textInputConfig={{
           multiline: true,
           onChangeText: inputValueChangeHandler.bind(this, "description"),
@@ -92,7 +96,9 @@ function InputForms({ onCancel, titleLabel, onSubmit, expenseItem }) {
         }}
       />
       {isValidDataCheck && (
-        <Text>Invalid data - please check data is valid or not</Text>
+        <Text style={styles.errorText}>
+          Invalid data - please check data is valid or not
+        </Text>
       )}
       <View style={styles.buttonStyle}>
         <CustomButton
@@ -137,5 +143,11 @@ const styles = StyleSheet.create({
   },
   buttons: {
     minWidth: 120,
+  },
+  errorText: {
+    margin: 8,
+    color: GlobalStyles.colors.error500,
+    fontSize: 15,
+    textAlign: "center",
   },
 });
