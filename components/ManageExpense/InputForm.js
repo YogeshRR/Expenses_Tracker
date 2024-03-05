@@ -37,7 +37,7 @@ function InputForms({ onCancel, titleLabel, onSubmit, expenseItem }) {
     };
     const amountValidation =
       !isNaN(inputs.amount.value) && inputs.amount.value > 0;
-    const dateValidation = inputs.date.value.toString() === "Invalid Date";
+    const dateValidation = inputs.date.value.toString() !== "Invalid Date";
     const descriptionValidation = inputs.description.value.trim().length > 0;
     if (!amountValidation || !dateValidation || !descriptionValidation) {
       //Alert.alert("Error", "Please enter correct data", ["Okay"]);

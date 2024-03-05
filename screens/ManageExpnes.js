@@ -5,6 +5,7 @@ import { ExpensesContext } from "../store/expenses-context";
 
 import InputForms from "../components/ManageExpense/InputForm";
 import IconButton from "../components/UI/IconButton";
+import { ExportData } from "../Utils/http";
 
 function ManageExpense({ route, navigation }) {
   const expensesCtx = useContext(ExpensesContext);
@@ -29,6 +30,7 @@ function ManageExpense({ route, navigation }) {
     if (isEdit) {
       expensesCtx.updateExpenses(expenseId, expenseData);
     } else {
+      ExportData(expenseData);
       expensesCtx.addExpenses(expenseData);
     }
     navigation.goBack();
