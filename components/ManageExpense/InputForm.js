@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, Alert } from "react-native";
 import { useState } from "react";
 
 import Input from "./Input";
@@ -6,13 +6,9 @@ import CustomButton from "../UI/CustomButton";
 import dayjs from "dayjs";
 
 function InputForms({ onCancel, titleLabel, onSubmit, expenseItem }) {
-  console.log(expenseItem.date);
   const [inputValue, setInputValue] = useState({
     amount: expenseItem ? expenseItem.amount.toString() : "",
-
-    date: expenseItem
-      ? expenseItem.date.toISOString().slice(0, 10)
-      : "Here I am",
+    date: expenseItem ? expenseItem.date.toISOString().slice(0, 10) : "",
     description: expenseItem ? expenseItem.description : "",
   });
 
@@ -30,7 +26,13 @@ function InputForms({ onCancel, titleLabel, onSubmit, expenseItem }) {
       date: new Date(inputValue.date),
       description: inputValue.description,
     };
-
+    const amountValidation = !isNaN(inputValue.amount) && inputValue.amount > 0;
+    const dateValidation = inputValue.date.toString() !== "Invalid Date";
+    const descriptionValidation = inputValue.description.trim().length > 0;
+    if (!amountValidation || !dateValidation || !descriptionValidation) {
+      Alert.alert("Error", "Please enter correct data", ["Okay"]);
+      return;
+    }
     onSubmit(expenseData);
   }
   return (
