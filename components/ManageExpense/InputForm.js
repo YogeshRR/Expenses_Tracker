@@ -3,13 +3,17 @@ import { useState } from "react";
 
 import Input from "./Input";
 import CustomButton from "../UI/CustomButton";
+import dayjs from "dayjs";
 
-function InputForms({ onCancel, titleLabel, onSubmit }) {
+function InputForms({ onCancel, titleLabel, onSubmit, expenseItem }) {
+  console.log(expenseItem.date);
   const [inputValue, setInputValue] = useState({
-    amount: "",
-    date: "",
-    description: "",
-    id: "",
+    amount: expenseItem ? expenseItem.amount.toString() : "",
+
+    date: expenseItem
+      ? expenseItem.date.toISOString().slice(0, 10)
+      : "Here I am",
+    description: expenseItem ? expenseItem.description : "",
   });
 
   function inputValueChangeHandler(inputIdentifier, enteredText) {
@@ -48,8 +52,8 @@ function InputForms({ onCancel, titleLabel, onSubmit }) {
           textInputConfig={{
             placeholder: "YYYY-MM-DD",
             maxLength: 10,
-            // onChangeText: inputValueChangeHandler.bind(this, "date"),
-            // value: inputValue.date,
+            onChangeText: inputValueChangeHandler.bind(this, "date"),
+            value: inputValue.date,
           }}
         />
       </View>

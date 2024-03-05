@@ -23,7 +23,7 @@ function ExpenseItem({ id, description, amount, date }) {
             {description}
           </Text>
           <Text style={styles.dateStyle}>
-            {dayjs(date).format("YYYY - MM - DD")}
+            {date.toISOString().slice(0, 10)}
           </Text>
         </View>
         <View style={styles.amountContainer}>

@@ -9,6 +9,9 @@ import IconButton from "../components/UI/IconButton";
 function ManageExpense({ route, navigation }) {
   const expensesCtx = useContext(ExpensesContext);
   const expenseId = route.params?.expenseId;
+  const expenseItemToUpdate = expensesCtx.expenses.find(
+    (expense) => expense.id === expenseId
+  );
   const isEdit = !!expenseId;
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -36,6 +39,7 @@ function ManageExpense({ route, navigation }) {
         titleLabel={isEdit ? "Update" : "Add"}
         onSubmit={submitEventHandler}
         onCancel={cancelEventHandler}
+        expenseItem={expenseItemToUpdate}
       />
 
       {isEdit && (
