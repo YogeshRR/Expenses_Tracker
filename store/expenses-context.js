@@ -78,7 +78,8 @@ function expenseReduce(state, action) {
       return [{ ...action.payload, id: id }, ...state];
       break;
     case "SET":
-      return action.payload;
+      const inverted = action.payload.reverse();
+      return inverted;
     case "DELETE":
       return state.filter((expense) => expense.id !== action.payload);
       break;

@@ -26,12 +26,12 @@ function ManageExpense({ route, navigation }) {
   function cancelEventHandler() {
     navigation.goBack();
   }
-  function submitEventHandler(expenseData) {
+  async function submitEventHandler(expenseData) {
     if (isEdit) {
       expensesCtx.updateExpenses(expenseId, expenseData);
     } else {
-      exportData(expenseData);
-      expensesCtx.addExpenses(expenseData);
+      const id = await exportData(expenseData);
+      expensesCtx.addExpenses({ ...expenseData, id: id });
     }
     navigation.goBack();
   }
