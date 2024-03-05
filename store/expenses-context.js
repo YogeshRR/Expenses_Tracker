@@ -66,6 +66,7 @@ const DUMMY_EXPENSES = [
 export const ExpensesContext = createContext({
   expenses: [],
   addExpenses: ({ description, amount, date }) => {},
+  setExpenses: (expenses) => {},
   deleteExpenses: (id) => {},
   updateExpenses: (id, { description, amount, date }) => {},
 });
@@ -76,6 +77,8 @@ function expenseReduce(state, action) {
       const id = new Date().toString() + Math.random().toString();
       return [{ ...action.payload, id: id }, ...state];
       break;
+    case "SET":
+      return action.payload;
     case "DELETE":
       return state.filter((expense) => expense.id !== action.payload);
       break;
@@ -96,9 +99,12 @@ function expenseReduce(state, action) {
 }
 
 function ExpensesContextProvider({ children }) {
-  const [expensesState, dispatch] = useReducer(expenseReduce, DUMMY_EXPENSES);
+  const [expensesState, dispatch] = useReducer(expenseReduce, []);
   function addExpenses(expenseData) {
     dispatch({ type: "ADD", payload: expenseData });
+  }
+  function setExpenses(expenses) {
+    dispatch({ type: "SET", payload: expenses });
   }
   function updateExpenses(id, expenseData) {
     dispatch({ type: "UPDATE", payload: { id: id, data: expenseData } });
@@ -109,6 +115,7 @@ function ExpensesContextProvider({ children }) {
   }
   const value = {
     expenses: expensesState,
+    setExpenses: setExpenses,
     addExpenses: addExpenses,
     updateExpenses: updateExpenses,
     deleteExpenses: deleteExpenses,

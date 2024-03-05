@@ -5,8 +5,10 @@ import ExpensesSummary from "./ExpensesSummary";
 import ExpensesList from "./ExpensesList";
 
 function ExpensesOutput({ myExpenses, expensesPeriodName }) {
-  let content = <Text>You don't have expenses now!!!</Text>;
-  if (myExpenses.length > 0) {
+  let content = (
+    <Text style={styles.textStyle}>You don't have expenses now!!!</Text>
+  );
+  if (myExpenses.length >= 0) {
     content = <ExpensesList expenses={myExpenses} />;
   }
   return (
@@ -29,5 +31,8 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     fontSize: 16,
+    textAlign: "center",
+    marginTop: 16,
+    color: GlobalStyles.colors.primary100,
   },
 });
